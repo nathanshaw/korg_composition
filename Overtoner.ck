@@ -66,11 +66,11 @@ fun void serialPoller()
     while(1){
         korg => now;
         while(korg.recv(msg)){
-            <<<msg.data1, msg.data2, msg.data3>>>;
+            //<<<msg.data1, msg.data2, msg.data3>>>;
             msg.data2 => int channel;
             msg.data3 => int value;
-            <<<"channel : ", channel >>>;
-            <<<"value : ", value >>>;
+            //<<<"channel : ", channel >>>;
+            //<<<"value : ", value >>>;
             
             if(-1 < channel && channel < 8){
                 (value$float/127) => float tempFloat;
@@ -104,9 +104,7 @@ fun void serialPoller()
                 }
             }
         }
-        1::ms => now;
     }
-    1::ms => now;
 }   
 
 
