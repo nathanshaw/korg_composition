@@ -55,7 +55,7 @@ fun void gain(int x, float g){
 MidiIn korg;
 MidiMsg msg;
 //open midi receiver, exit on fail
-if( !korg.open(0) ){
+if( !korg.open(1) ){
     <<<"Problem connecting to MIDI device">>>;   
 }
 //function for shred
