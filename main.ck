@@ -6,8 +6,8 @@ if( !korg.open(0) ){
 }
 //function for shred
 
-drummer drum;
-drum.initalize();
+overtone overtone;
+
 1::second => now;
 
 while(1){
@@ -15,7 +15,7 @@ while(1){
     
     while(korg.recv(msg)){
         //<<<msg.data1, msg.data2, msg.data3>>>;
-        //single hit fro drums
+        //single hit fro overtones
         msg.data2 => int channel;
         msg.data3 => int value;
         //<<<"channel : ", channel >>>;
@@ -24,22 +24,22 @@ while(1){
         if(-1 < channel && channel < 8){
             (value$float/127) => float tempFloat;
             //<<<tempFloat>>>;
-        drum.gain(channel, tempFloat);
+        overtone.gain(channel, tempFloat);
         }
         else if (channel > 15 && channel < 24){
             1 +=> value;
-         drum.changeRate(channel - 16, value$float/15);   
+         overtone.changeRate(channel - 16, value$float/15);   
         }
         else if(31 < channel && channel < 40){
             if(value == 127){
-                //<<<"triggering drum type :", (channel-32)>>>;
-                drum.hit(channel-32);
+                //<<<"triggering overtone type :", (channel-32)>>>;
+                overtone.hit(channel-32);
             }   
         } 
         else if(channel > 47 && channel < 56){
             if(value == 127){
              //<<<"Changing channel ", (channel-48), "to another samples">>>;
-             drum.switchSample(channel - 48);
+             overtone.switchSample(channel - 48);
             }   
         }
     }
